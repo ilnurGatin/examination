@@ -1,0 +1,18 @@
+### Создать и добавить вопрос c параметрами
+POST http://localhost:8080/exam/java/add?question=testQuestion1&answer=testAnswer1
+
+### Создать и добавить вопрос c параметрами
+POST http://localhost:8080/exam/java/add?question=testQuestion2&answer=testAnswer2
+
+### Создать и добавить вопрос c параметрами
+POST http://localhost:8080/exam/java/add?question=testQuestion3&answer=testAnswer3
+
+### Создать и добавть вопрос с телом запроса
+http://localhost:8080/exam/java/add/question
+Content-Type: application/json
+
+{
+  "question": "Test question #1",
+  "answer": "Test answer to question #1"
+}
+
