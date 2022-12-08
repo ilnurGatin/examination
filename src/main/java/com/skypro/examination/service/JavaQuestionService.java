@@ -4,6 +4,7 @@ import com.skypro.examination.model.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class JavaQuestionService implements QuestionService {
@@ -21,26 +22,32 @@ public class JavaQuestionService implements QuestionService {
     public Question add(Question question) {
         Question newQuestion = new Question(question.getQuestion(), question.getAnswer());
         this.questions.add(newQuestion);
-        return null;
+        return question;
     }
 
 
     @Override
     public Question removeQuestion(Question question) {
-        this.questions.remove(question);
+        questions.remove(question);
         return question;
     }
 
     @Override
     public Collection<Question> getAll() {
-        return questions;
+        return Collections.unmodifiableCollection(questions);
     }
 
     @Override
     public Question getRandomQuestion() {
+        if (questions.isEmpty()) {
+            throw new NoSuchElementException();
+        }
         Random random = new Random();
-        int index = random.nextInt(questions.size() + 1);
-        Question[] question = questions.toArray(new Question[questions.size()]);
-        return question[index];
+        int number = random.nextInt(questions.size());
+        return questions
+                .stream()
+                .skip(number)
+                .findFirst()
+                .orElseThrow();
     }
 }

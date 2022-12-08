@@ -8,7 +8,7 @@ POST http://localhost:8080/exam/java/add?question=testQuestion2&answer=testAnswe
 POST http://localhost:8080/exam/java/add?question=testQuestion3&answer=testAnswer3
 
 ### Создать и добавть вопрос с телом запроса
-http://localhost:8080/exam/java/add/question
+POST http://localhost:8080/exam/java/add/question
 Content-Type: application/json
 
 {
@@ -16,3 +16,14 @@ Content-Type: application/json
   "answer": "Test answer to question #1"
 }
 
+### Удалить вопрос из хранилиища
+GET http://localhost:8080/exam/java/remove?question=testQuestion1&answer=testAnswer1
+
+### Запросить все вопросы из хранилища
+GET http://localhost:8080/exam/java/
+
+### Получить больше вопросов чем существует
+GET http://localhost:8080/exam/getQuestions/8
+
+### Получить несеолько вопросов из базы
+GET http://localhost:8080/exam/getQuestions/2

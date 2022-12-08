@@ -10,14 +10,15 @@ import java.util.Collection;
 @RequestMapping("/exam/java")
 public class JavaQuestionController {
 
-private final JavaQuestionService javaQuestionService;
+    private final JavaQuestionService javaQuestionService;
 
     public JavaQuestionController(JavaQuestionService javaQuestionService) {
         this.javaQuestionService = javaQuestionService;
     }
 
     @PostMapping("/add")
-    public Question addQuestion(@RequestParam("question") String question, @RequestParam("answer") String answer) {
+    public Question addQuestion(@RequestParam("question") String question,
+                                @RequestParam("answer") String answer) {
         return this.javaQuestionService.addQuestion(question, answer);
     }
 
@@ -27,12 +28,16 @@ private final JavaQuestionService javaQuestionService;
     }
 
     @GetMapping("/remove")
-    public Question removeQuestion(@RequestBody Question question) {
-        return this.javaQuestionService.removeQuestion(question);
+    public Question removeQuestion(@RequestParam("question") String question,
+                                   @RequestParam("answer") String answer) {
+        Question q = new Question(question, answer);
+        return this.javaQuestionService.removeQuestion(q);
     }
 
     @GetMapping("/")
     public Collection<Question> getAllQuestions() {
         return this.javaQuestionService.getAll();
     }
+
+
 }
